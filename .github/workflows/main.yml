@@ -1,22 +1,24 @@
 name: Build and Release
+
 on:
   push:
     tags:
-     - 'v*'
+      - 'v*'
+
 jobs:
   build-and-deploy:
-    runs-on: ubnutu-latest
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Обновление Кода (Zip)
+      - name: Обновление кода
         uses: actions/checkout@v3
 
-      - name: Создание Артефакта (Zip)
+      - name: Создание архива
         run: |
-          zip -r project-v1.zip main.py 
+          zip -r project-v1.zip main.py
 
-      - name: Create Release 
-        uses: Softprops/action-gh-release@v1
-
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
         with:
           files: project-v1.zip
         env:
